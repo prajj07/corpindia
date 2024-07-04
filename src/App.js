@@ -1,12 +1,12 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import IndiaPage from './pages/IndiaPage';
-import CompanyPage from './pages/CompanyPage';
-import LatestNewsPage from './pages/LatestNewsPage';
-import AboutUsPage from './pages/AboutUsPage';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import IndiaPage from "./pages/IndiaPage";
+import CompanyPage from "./pages/CompanyPage";
+import LatestNewsPage from "./pages/LatestNewsPage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 const App = () => {
   return (
@@ -26,6 +26,6 @@ const App = () => {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

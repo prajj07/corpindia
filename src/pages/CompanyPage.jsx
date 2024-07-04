@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const CompanyPage = () => {
   // Mock data for demonstration, replace with actual incoming data
@@ -11,16 +11,19 @@ const CompanyPage = () => {
     employees: 25000,
     revenue: -8300,
     score: 500,
-    funding: [/* Funding data */],
-    report: "Byju's faces a turbulent present. Once valued at $22 billion, it's now worth $200 million, battling mounting debt and facing criticism for aggressive marketing practices. While they boast 150 million users, hefty losses and layoffs paint a picture of financial strain.",
-    similarCompanies: ["Company A", "Company B", "Company C"]
+    funding: [
+      /* Funding data */
+    ],
+    report:
+      "Byju's faces a turbulent present. Once valued at $22 billion, it's now worth $200 million, battling mounting debt and facing criticism for aggressive marketing practices. While they boast 150 million users, hefty losses and layoffs paint a picture of financial strain.",
+    similarCompanies: ["Company A", "Company B", "Company C"],
   };
 
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold">{companyData.name}</h1>
       <p>{companyData.description}</p>
-      
+
       <div className="mt-4">
         <h2 className="text-2xl font-semibold">Company Insights</h2>
         <div className="grid grid-cols-2 gap-4 mt-2">
@@ -55,6 +58,6 @@ const CompanyPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default CompanyPage;
