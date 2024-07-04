@@ -1,138 +1,67 @@
-import React from "react";
-import DatamapsIndia from "react-datamaps-india";
+import React, { useLayoutEffect, useRef } from "react";
+import * as am5 from "@amcharts/amcharts5";
+import * as am5map from "@amcharts/amcharts5/map";
+import am5geodata_indiaLow from "@amcharts/amcharts5-geodata/indiaLow";
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 const MapChart = () => {
+  const chartRef = useRef(null);
+
+  useLayoutEffect(() => {
+    let root = am5.Root.new(chartRef.current);
+
+    root.setThemes([am5themes_Animated.new(root)]);
+
+    let chart = root.container.children.push(
+      am5map.MapChart.new(root, {
+        panX: "none",
+        panY: "none",
+        wheelX: "none",
+        wheelY: "none",
+        projection: am5map.geoMercator()
+      })
+    );
+
+    let polygonSeries = chart.series.push(
+      am5map.MapPolygonSeries.new(root, {
+        geoJSON: am5geodata_indiaLow
+      })
+    );
+
+    polygonSeries.mapPolygons.template.setAll({
+      tooltipText: "{name}: {value}°C",
+      interactive: true
+    });
+
+    polygonSeries.mapPolygons.template.states.create("hover", {
+      fill: am5.color(0x6771dc)
+    });
+
+    let data = [
+      { id: "IN-UP", name: "Uttar Pradesh", value: 33 },
+      { id: "IN-MH", name: "Maharashtra", value: 32 },
+      { id: "IN-BR", name: "Bihar", value: 31 },
+      // Add all other states here...
+    ];
+
+    polygonSeries.data.setAll(data);
+
+    polygonSeries.mapPolygons.template.events.on("click", function (ev) {
+      let data = ev.target.dataItem.dataContext;
+      let infoBox = document.getElementById("info");
+      infoBox.innerText = "State: " + data.name + ", Temperature: " + data.value + "°C";
+      infoBox.style.display = "block"; // Show the info box
+    });
+
+    return () => {
+      root.dispose();
+    };
+  }, []);
+
   return (
-    <div style={{ position: "relative" }}>
-      <DatamapsIndia
-        style={{ postion: "relative", left: "25%" }}
-        regionData={{
-          "Andaman & Nicobar Island": {
-            value: 150
-          },
-          "Andhra Pradesh": {
-            value: 470
-          },
-          "Arunanchal Pradesh": {
-            value: 248
-          },
-          Assam: {
-            value: 528
-          },
-          Bihar: {
-            value: 755
-          },
-          Chandigarh: {
-            value: 95
-          },
-          Chhattisgarh: {
-            value: 1700
-          },
-          Delhi: {
-            value: 1823
-          },
-          Goa: {
-            value: 508
-          },
-          Gujarat: {
-            value: 624
-          },
-          Haryana: {
-            value: 1244
-          },
-          "Himachal Pradesh": {
-            value: 640
-          },
-          "Jammu & Kashmir": {
-            value: 566
-          },
-          Jharkhand: {
-            value: 814
-          },
-          Karnataka: {
-            value: 2482
-          },
-          Kerala: {
-            value: 899
-          },
-          Lakshadweep: {
-            value: 15
-          },
-          "Madhya Pradesh": {
-            value: 1176
-          },
-          Maharashtra: {
-            value: 727
-          },
-          Manipur: {
-            value: 314
-          },
-          Meghalaya: {
-            value: 273
-          },
-          Mizoram: {
-            value: 306
-          },
-          Nagaland: {
-            value: 374
-          },
-          Odisha: {
-            value: 395
-          },
-          Puducherry: {
-            value: 245
-          },
-          Punjab: {
-            value: 786
-          },
-          Rajasthan: {
-            value: 1819
-          },
-          Sikkim: {
-            value: 152
-          },
-          "Tamil Nadu": {
-            value: 2296
-          },
-          Telangana: {
-            value: 467
-          },
-          Tripura: {
-            value: 194
-          },
-          "Uttar Pradesh": {
-            value: 2944
-          },
-          Uttarakhand: {
-            value: 1439
-          },
-          "West Bengal": {
-            value: 1321
-          }
-        }}
-        hoverComponent={({ value }) => {
-          return (
-            <div>
-              <div>
-                {value.name} {value.value} data
-              </div>
-            </div>
-          );
-        }}
-        mapLayout={{
-          title: "CORPINDIA",
-          legendTitle: "",
-          startColor: "#b3d1ff",
-          endColor: "#005ce6",
-          hoverTitle: "Count",
-          noDataColor: "#f5f5f5",
-          borderColor: "#8D8D8D",
-          hoverColor: "blue",
-          hoverBorderColor: "green",
-          height: 5,
-          weight: 10
-        }}
-      />
+    <div>
+      <div ref={chartRef} style={{ width: "100%", height: "500px" }}></div>
+      <div id="info" style={{ marginTop: "10px", textAlign: "center" }}></div>
     </div>
   );
 };

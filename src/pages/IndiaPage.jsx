@@ -1,5 +1,5 @@
-import React from 'react';
-import MapChart from '../MapChart';
+import React from "react";
+import MapChart from "../MapChart";
 
 const IndiaPage = () => {
   return (
@@ -9,6 +9,6 @@ const IndiaPage = () => {
       <MapChart />
     </div>
   );
-}
+};
 
 export default IndiaPage;
