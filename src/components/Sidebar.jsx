@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className='w-58 bg-blue-500 fixed h-full px-5 ml-[-20px] py-2 rounded-tr-3xl rounded-br-3xl'>
+    <div className='w-58 bg-blue-500 fixed h-full px-5  py-2 rounded-tr-3xl rounded-br-3xl'>
       <div className='my-2 mb-4'>
         <h1 className='text-2x text-white font-bold'>CORPINDA</h1>
       </div>
