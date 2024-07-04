@@ -2,12 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Additional global styles if needed */
-html {
-  font-family: system-ui, sans-serif;
-  font-size: 1.25rem;
+/* Map height adjustment for responsiveness */
+@media (max-width: 768px) {
+  svg {
+    height: 400px;
+  }
 }
 
-body {
-  margin: 0;
+@media (max-width: 480px) {
+  svg {
+    height: 300px;
+  }
+}
+
+/* Center the map and state data on smaller screens */
+div[style*="position: relative"] {
+  align-items: center !important;
 }
