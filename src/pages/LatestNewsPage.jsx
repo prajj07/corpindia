@@ -7,6 +7,6 @@ const LatestNewsPage = () => {
       <p>Welcome to the Latest News Page!</p>
     </div>
   );
-}
+};
 
 export default LatestNewsPage;
