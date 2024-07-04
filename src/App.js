@@ -11,9 +11,9 @@ import AboutUsPage from "./pages/AboutUsPage";
 const App = () => {
   return (
     <Router>
-      <div className="flex">
+      <div className="flex-1 flex flex-col ml-4">
         <Sidebar />
-        <div className="flex-1 ml-64">
+        <div className="flex-1 w-58">
           <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />

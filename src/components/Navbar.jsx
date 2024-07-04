@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const Navbar = () => {
   return (
     <div className="bg-blue-500 p-4 text-white flex justify-between items-center">
@@ -15,7 +16,6 @@ const Navbar = () => {
           <div className="text-sm text-gray-200">prajwal@example.com</div> {/* Replace with dynamic email */}
         </div>
       </div>
-    </div>
   );
 };
 

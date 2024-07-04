@@ -13,6 +13,9 @@ const Sidebar = () => {
         <h1 className="text-3xl text-white font-semibold tracking-wide hover:tracking-wider transition-all duration-300">
           CORPINDA
         </h1>
+    <div className='w-64 bg-blue-500 fixed h-full px-4 py-4 rounded-tr-3xl left-0'>
+      <div className='my-4'>
+        <h1 className='text-3xl text-white font-semibold'>CORPINDA</h1>
       </div>
       <div className="mt-4 text-white font-semibold tracking-wide hover:tracking-wider transition-all duration-500">
         <div className="mb-4 rounded hover:shadow hover:bg-blue-600 py-2">
