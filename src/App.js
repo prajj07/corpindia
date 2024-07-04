@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import IndiaPage from './pages/IndiaPage';
+import CompanyPage from './pages/CompanyPage';
+import LatestNewsPage from './pages/LatestNewsPage';
+import AboutUsPage from './pages/AboutUsPage';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="flex">
+        <Sidebar />
+        <div className="flex-1 ml-64">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/india" element={<IndiaPage />} />
+            <Route path="/company" element={<CompanyPage />} />
+            <Route path="/latest-news" element={<LatestNewsPage />} />
+            <Route path="/about-us" element={<AboutUsPage />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
