@@ -29,7 +29,7 @@ const MapChart = () => {
     );
 
     polygonSeries.mapPolygons.template.setAll({
-      tooltipText: "{name}: {value}°C",
+      tooltipText: "{name}",
       interactive: true
     });
 
@@ -49,7 +49,7 @@ const MapChart = () => {
     polygonSeries.mapPolygons.template.events.on("click", function (ev) {
       let data = ev.target.dataItem.dataContext;
       let infoBox = document.getElementById("info");
-      infoBox.innerText = "State: " + data.name + ", Temperature: " + data.value + "°C";
+      infoBox.innerText = "State: " + data.name ;
       infoBox.style.display = "block"; // Show the info box
     });
 

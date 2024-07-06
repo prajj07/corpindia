@@ -32,7 +32,7 @@ const LatestNewsPage = () => {
   return (
     <div className="flex">
       {/* Sidebar */}
-      <div className="w-1/6 bg-white px-1">
+      <div className="w-1 bg-white px-1">
         {/* Sidebar content */}
       </div>
 

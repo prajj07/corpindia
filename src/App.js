@@ -10,12 +10,6 @@ import AboutUsPage from "./pages/AboutUsPage";
 
 const App = () => {
 
-  const user = {
-    avatarUrl: "https://via.placeholder.com/40", // Replace with actual avatar URL
-    name: "Prajwal", // Replace with actual name
-    email: "exampl@gmail.com" // Replace with actual email
-  };
-
   return (
     <Router>
       <div className="flex">
@@ -31,7 +25,6 @@ const App = () => {
           </Routes>
         </div>
         <div>
-      <Navbar avatarUrl={user.avatarUrl} name={user.name} email={user.email} />
     </div>
       </div>
     </Router>
