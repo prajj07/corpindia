@@ -1,6 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import Search from "../components/Search";
+import Papa from 'papaparse';
 
 const CompanyPage = () => {
+  const options = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+    // Add more options as needed
+  ];
+
+  const [selected, setSelected] = useState("")
+  const [companies, setCompanies] = useState([]);
+
+  useEffect(() => {
+    // Fetch the CSV file
+    fetch('/combined-companies.csv')
+      .then(response => response.text())
+      .then(csvText => {
+        // Parse the CSV file content
+        Papa.parse(csvText, {
+          header: true,
+          complete: (results) => {
+            const formattedCompanies = results.data.map(row => ({
+              value: row.company,
+              label: row.company
+            }));
+            setCompanies(formattedCompanies);
+          }
+        });
+      })
+      .catch(error => console.error('Error fetching the CSV file:', error));
+  }, []);
+
   // Mock data for demonstration, replace with actual incoming data
   const companyData = {
     name: "Byju's",
@@ -11,16 +43,20 @@ const CompanyPage = () => {
     employees: 25000,
     revenue: -8300,
     score: 500,
-    funding: [/* Funding data */],
-    report: "Byju's faces a turbulent present. Once valued at $22 billion, it's now worth $200 million, battling mounting debt and facing criticism for aggressive marketing practices. While they boast 150 million users, hefty losses and layoffs paint a picture of financial strain.",
-    similarCompanies: ["Company A", "Company B", "Company C"]
+    funding: [
+      /* Funding data */
+    ],
+    report:
+      "Byju's faces a turbulent present. Once valued at $22 billion, it's now worth $200 million, battling mounting debt and facing criticism for aggressive marketing practices. While they boast 150 million users, hefty losses and layoffs paint a picture of financial strain.",
+    similarCompanies: ["Company A", "Company B", "Company C"],
   };
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold">{companyData.name}</h1>
+      <Search options={companies} setSelected={setSelected} />
+      <h1 className="text-3xl font-bold">{selected ? selected : ""}</h1>
       <p>{companyData.description}</p>
-      
+
       <div className="mt-4">
         <h2 className="text-2xl font-semibold">Company Insights</h2>
         <div className="grid grid-cols-2 gap-4 mt-2">
@@ -55,6 +91,6 @@ const CompanyPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default CompanyPage;

@@ -1,14 +1,21 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import IndiaPage from './pages/IndiaPage';
-import CompanyPage from './pages/CompanyPage';
-import LatestNewsPage from './pages/LatestNewsPage';
-import AboutUsPage from './pages/AboutUsPage';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import IndiaPage from "./pages/IndiaPage";
+import CompanyPage from "./pages/CompanyPage";
+import LatestNewsPage from "./pages/LatestNewsPage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 const App = () => {
+
+  const user = {
+    avatarUrl: "https://via.placeholder.com/40", // Replace with actual avatar URL
+    name: "Prajwal", // Replace with actual name
+    email: "exampl@gmail.com" // Replace with actual email
+  };
+
   return (
     <Router>
       <div className="flex">
@@ -23,9 +30,13 @@ const App = () => {
             <Route path="/about-us" element={<AboutUsPage />} />
           </Routes>
         </div>
+        <div>
+      <Navbar avatarUrl={user.avatarUrl} name={user.name} email={user.email} />
+    </div>
       </div>
     </Router>
+    
   );
-}
+};
 
 export default App;
