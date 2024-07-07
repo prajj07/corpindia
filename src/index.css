@@ -19,3 +19,17 @@
 div[style*="position: relative"] {
   align-items: center !important;
 }
+
+.map-container {
+  display: flex;
+  flex-direction: row-reverse; /* Reverse the direction to float map to the right */
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.map {
+  width: 50%; /* Adjust width as needed */
+  height: 500px;
+}

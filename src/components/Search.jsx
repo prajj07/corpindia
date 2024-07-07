@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import Select from 'react-select';
+import React, { useState } from "react";
+import Select from "react-select";
 
 const customStyles = {
   control: (provided) => ({
     ...provided,
-    borderColor: '#d1d5db',
-    '&:hover': {
-      borderColor: '#6b7280'
+    borderColor: "#d1d5db",
+    "&:hover": {
+      borderColor: "#6b7280",
     },
   }),
   menu: (provided) => ({
@@ -15,13 +15,13 @@ const customStyles = {
   }),
 };
 
-const   Search = ({ options, setSelected }) => {
+const Search = ({ options, setSelected }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleChange = (option) => {
     setSelectedOption(option);
     //aws code
-    option ? setSelected(option.value) : setSelected("")
+    option ? setSelected(option.value) : setSelected("");
     console.log("Selected option:", option);
   };
 

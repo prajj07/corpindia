@@ -9,7 +9,6 @@ import LatestNewsPage from "./pages/LatestNewsPage";
 import AboutUsPage from "./pages/AboutUsPage";
 
 const App = () => {
-
   return (
     <Router>
       <div className="flex">
@@ -24,11 +23,9 @@ const App = () => {
             <Route path="/about-us" element={<AboutUsPage />} />
           </Routes>
         </div>
-        <div>
-    </div>
+        <div></div>
       </div>
     </Router>
-    
   );
 };
 
