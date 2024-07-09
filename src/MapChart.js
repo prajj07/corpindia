@@ -61,7 +61,7 @@ const MapChart = ({ onStateClick }) => {
 
   return (
     <div>
-      <div ref={chartRef} className="map"></div>
+      <div ref={chartRef} style={{ width: "70%", height: "500px"}}></div>
     </div>
   );
 };

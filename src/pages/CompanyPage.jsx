@@ -7,6 +7,7 @@ const CompanyPage = () => {
   const [selected, setSelected] = useState("");
   const [companies, setCompanies] = useState([]);
   const [companyData, setCompanyData] = useState(null);
+  const [tableauLoaded, setTableauLoaded] = useState(false);
 
   useEffect(() => {
     // Directly use the URL of your CSV file in S3
@@ -42,12 +43,30 @@ const CompanyPage = () => {
   }, []);
 
   useEffect(() => {
+    // Check if Tableau script has loaded
+    const checkTableauScript = () => {
+      if (window.tableau) {
+        setTableauLoaded(true);
+      } else {
+        const script = document.createElement("script");
+        script.src = "https://public.tableau.com/javascripts/api/tableau-2.min.js";
+        script.onload = () => {
+          setTableauLoaded(true);
+        };
+        document.body.appendChild(script);
+      }
+    };
+
+    checkTableauScript();
+  }, []);
+
+  useEffect(() => {
     if (selected && companies.length) {
       const selectedCompany = companies.find(
         (company) => company.value === selected,
       );
       if (selectedCompany) {
-        console.log("Selected Company Data:", selectedCompany); // Add this line
+        console.log("Selected Company Data:", selectedCompany); // Debugging log
         setCompanyData({
           name: selectedCompany.label,
           description: selectedCompany.description || "N/A",
@@ -84,7 +103,7 @@ const CompanyPage = () => {
       </h1>
       <p className="mt-5">{companyData?.description}</p>
 
-      {companyData && (
+      {companyData && tableauLoaded && (
         <>
           <div className="mt-4">
             <h2 className="text-2xl font-semibold">Company Insights</h2>
@@ -113,7 +132,7 @@ const CompanyPage = () => {
           <div className="mt-4">
             <h2 className="text-2xl font-semibold">Funding</h2>
             {/* Pass companyData.company_id to TableauCompany */}
-            <TableauCompany companyIdParameter={companyData.company_id} />
+            {companyData.company_id && <TableauCompany companyIdParameter={companyData.company_id} />}
           </div>
 
           <div className="mt-4">

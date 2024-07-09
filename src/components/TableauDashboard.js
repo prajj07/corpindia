@@ -1,36 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 const TableauDashboard = ({ dashboardUrl }) => {
   const vizRef = useRef(null);
-  const [tableauLoaded, setTableauLoaded] = useState(false);
 
   useEffect(() => {
     const loadTableauScript = () => {
       return new Promise((resolve, reject) => {
         if (window.tableau) {
-          setTableauLoaded(true);
           resolve(window.tableau);
           return;
         }
 
         const script = document.createElement("script");
         script.src = "https://public.tableau.com/javascripts/api/tableau-2.min.js";
-        script.onload = () => {
-          setTableauLoaded(true);
-          resolve(window.tableau);
-        };
-        script.onerror = (error) => {
-          console.error("Error loading Tableau script:", error);
-          reject(error);
-        };
+        script.onload = () => resolve(window.tableau);
+        script.onerror = (error) => reject(error);
         document.body.appendChild(script);
       });
     };
 
     loadTableauScript()
       .then((tableau) => {
-        console.log("Tableau script loaded");
-
         if (tableau && tableau.Viz) {
           new tableau.Viz(vizRef.current, dashboardUrl, {
             hideTabs: true,
@@ -49,19 +39,15 @@ const TableauDashboard = ({ dashboardUrl }) => {
       });
 
     return () => {
-      if (window.tableau && window.tableau.VizManager) {
+      if (vizRef.current && window.tableau && window.tableau.VizManager) {
         window.tableau.VizManager.getVizs().forEach((viz) => {
-          if (viz) {
+          if (viz && viz.getParentElement() === vizRef.current) {
             viz.dispose();
           }
         });
       }
     };
   }, [dashboardUrl]);
-
-  if (!tableauLoaded) {
-    return <div>Loading Tableau...</div>;
-  }
 
   return <div ref={vizRef}></div>;
 };
